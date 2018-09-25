@@ -9,15 +9,15 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class ChromeDriverManager extends DriverManager {
 
-	private ChromeDriverService chService;
+	private ChromeDriverService chromeService;
 
 	@Override
 	public void startService() {
-		if (null == chService) {
+		if (null == chromeService) {
 			try {
-				chService = new ChromeDriverService.Builder()
+				chromeService = new ChromeDriverService.Builder()
 						.usingDriverExecutable(new File("path/to/my/chromedriver.exe")).usingAnyFreePort().build();
-				chService.start();
+				chromeService.start();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -26,16 +26,14 @@ public class ChromeDriverManager extends DriverManager {
 
 	@Override
 	public void stopService() {
-		if (null != chService && chService.isRunning())
-			chService.stop();
+		if (null != chromeService && chromeService.isRunning())
+			chromeService.stop();
 	}
 
 	@Override
 	public void createDriver() {
-		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		ChromeOptions options = new ChromeOptions();
-		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-		driver = new ChromeDriver(chService, capabilities);
+		driver = new ChromeDriver(chromeService, options);
 	}
 
 }

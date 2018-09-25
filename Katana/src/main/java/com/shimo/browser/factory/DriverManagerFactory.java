@@ -1,6 +1,7 @@
 package com.shimo.browser.factory;
 
 public class DriverManagerFactory {
+	
 	public static DriverManager getManager(DriverType type) {
 
 		DriverManager driverManager;
@@ -10,10 +11,10 @@ public class DriverManagerFactory {
 			driverManager = new ChromeDriverManager();
 			break;
 		case FIREFOX:
-//			driverManager = new FirefoxDriverManager();
+			driverManager = new FirefoxDriverManager();
 			break;
 		default:
-//			driverManager = new SafariDriverManager();
+			driverManager = new ChromeDriverManager();
 			break;
 		}
 		return driverManager;
